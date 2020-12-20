@@ -1,4 +1,3 @@
 # Grouppurchase_app
 
-공동구매 어플
-printf(" ");
+jiyeon 폴더에서 확인 가능합니다.
