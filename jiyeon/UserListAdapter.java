@@ -56,10 +56,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MainVi
 
     @Override
     public void onBindViewHolder(@NonNull final MainViewHolder holder, int position) {
+        
         CardView cardView = holder.cardView;
         ImageView photoImageVIew = cardView.findViewById(R.id.photoImageVIew);
         TextView nameTextView = cardView.findViewById(R.id.nameTextView);
-        TextView phoneNumberTextView = cardView.findViewById(R.id.phoneNumberTextView);
+        TextView phoneNumberTextView = cardView.findViewById(R.id.phonenumTextView);
 
         UserInfo userInfo = mDataset.get(position);
         if(mDataset.get(position).getPhotoUrl() != null){
