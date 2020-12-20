@@ -46,7 +46,7 @@
                 android:id="@+id/phonenumTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="010-0000-1111" />
+                tools:text="010-1111-2222" />
         </LinearLayout>
 
     </LinearLayout>
