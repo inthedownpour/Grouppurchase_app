@@ -40,6 +40,7 @@ public class UserListFragment extends Fragment {
     private boolean topScrolled;
 
     public UserListFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -53,12 +54,12 @@ public class UserListFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_user_list, container, false);
 
-        //파이어스토어 인스턴스 초기화
         firebaseFirestore = FirebaseFirestore.getInstance();
         userList = new ArrayList<>();
         userListAdapter = new UserListAdapter(getActivity(), userList);
 
         final RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        //view.findViewById(R.id.floatingActionButton).setOnClickListener(onClickListener);
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -80,14 +81,8 @@ public class UserListFragment extends Fragment {
                 }
             }
 
-            public int getItemCount(){
-                return userList.size();
-
-            }
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-                userList.clear();
                 super.onScrolled(recyclerView, dx, dy);
 
                 RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -130,6 +125,12 @@ public class UserListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                /*
+                case R.id.logoutButton:
+                    FirebaseAuth.getInstance().signOut();
+                    myStartActivity(SignUpActivity.class);
+                    break;
+                */
                 case R.id.floatingActionButton:
                     myStartActivity(WritePostActivity.class);
                     break;
@@ -155,6 +156,7 @@ public class UserListFragment extends Fragment {
 
     private void postsUpdate(final boolean clear) {
         updating = true;
+        //Date date = userList.size() == 0 || clear ? new Date() : userList.get(userList.size() - 1).getCreatedAt();
         CollectionReference collectionReference = firebaseFirestore.collection("users");
         collectionReference.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -174,9 +176,7 @@ public class UserListFragment extends Fragment {
                                         document.getData().get("photoUrl") == null ? null : document.getData().get("photoUrl").toString()));
                             }
                             userListAdapter.notifyDataSetChanged();
-                        }
-
-                        else {
+                        } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
                         updating = false;
